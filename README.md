@@ -108,13 +108,8 @@ gs2 input -e 100 -l > output
 ```  
 
 ### Genome comparison 
-+ Nucleotide sequences of RNA viral contigs found in samples are translated and compared with each other using tblastX approach (Belda et al. 2019)
-+ Comparison of genomic similarity between viral contigs is visualized using **[Easyfig v2.2.2](https://mjsull.github.io/Easyfig/)**
++ Viral sequence found in the pipeline can be compared with its 'neighbors', i.e., some reference sequences of known virus which are annotated to the novel sequence in the Blast analysis or post phylogenetic analysis, or some other novel sequences from other samples having similar taxonomic profiles with the sequence of interest.
++ Sequence comparison based on the sequence similarity of nucleotide or protein level is performed by the pairwise comparison by BlastN or TBlastX visualized using **[Easyfig](https://mjsull.github.io/Easyfig/)** genome comparison tool.
+![example snapshot](./image/contig_comp_easyfig.svg)  
 
 ### Genome completion
-
-## What we obtain from this pipeline?
-+ Detection of RNA viral full/partial genomes, with taxonomic annotations, ORF predictions, comparison of gene repertory/order/similarity, and variant callings
-+ Sequencing quality check on a target viral genome, e.g. rRNA read counts to chek the success of the rRNA depletion 
-+ Viral taxonomic diversity and abundance in mosquito sample(s) of interest.
-+ Detection of possible 'new' viral sequences
