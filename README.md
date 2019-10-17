@@ -71,19 +71,19 @@ The job batch file require the below options;
 ### Assembling contigs and identifying viral contigs
 + Assemble contigs from the non-low quality and non-rRNA, non-mosquito reads set using **Megahit** or **metaSPAdes**
 + Subject assembled contigs to the viral sequence prediction by their k-mer frequency using **VirFinder**
-    + VirFinder uses an user-trained model to score the possibility of each contig as a viral sequence
+    + VirFinder uses an user-trained model (/pipeline/VF.trainModUser.AeAegypt_Riboviria.rda) to score the possibility of each contig as a viral sequence
     + The pipeline embedded model was trained based on the CDS sequences of global taxonomy of RNA virus
         + In GENBANK, all available CDS data was retrieved from Riboviria, of which genome was completed.
         + Then the collected sequences were clustered based on their nucleotide identity (>95%) using CD-HIT
         + Clustered sequences set was subjected to the model training by VirFinder, following the [instruction](https://github.com/jessieren/VirFinder)
-        + CDS sequences of host mosquito species were also collected and clustered in the same way and used in the model training.  
+        + CDS sequences of host mosquito species were also collected and clustered in the same way and used in the model training.
++ Possible viral contigs were screened by their lengths (> 1000bp), coverages in the assemble (> 10), and p-value scores (< 0.01)
 
-### Mapping reads on the selected contigs themselves
-+ For each contig selected from BlastX hits
-    +  Map non-low quarity and non-mosquito reads to the contig itself using **BOWTIE2** with relaxed parameters of the similarity and alignment length
-    +  a preset parameters of '--very-sensitive-local' option is applied
-    +  Create a consensus sequence from the mapped reads
-+ Compute read count, coverage depth (read per position), and call variants on the consensus sequence.  
+### Mapping reads on viral contigs
++ For each contig predicted by VirFinder;
+    +  Map non-low quarity and non-mosquito reads to the contig itself using **BOWTIE2** with '--sensitive-local' option
+    +  Create a consensus sequence from the mapped reads, which is assumed to be identical with the original contig
++ Compute the mapped read count, viral abundance as Reads Per Kilobase Million (RPKM), coverage depth (reads per position), and call genomic variants.  
 
 ### ORF prediction and protein gene annotation
 + Contigs from the above mapping procedure is then subjected to the gene prediction by [GeneMark.hmm](http://exon.gatech.edu/index.html). 
