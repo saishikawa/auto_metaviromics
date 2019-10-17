@@ -51,10 +51,10 @@ The job batch file require the below options;
   + --ORF-PRED=(boolen)             specify yes or no if you want/don't want to predict ORFs on your contigs and perform their functional annotation via DIAMOND
   +	--DIAMOND-DB=(path)             specify path to DIAMOND formatted database which must be assigned with NCBI taxonomy, if you specified --ORF-PRED=yes
   +	--LINEAGE=(path)                specify path to NCBI taxonomy dump file converted in lineage format, if you specified --ORF-PRED=yes
-  + The pipeline provide some checkpoints by turn on/off the --FILTERING, --ASSEMBLING, --VIRAL-CONTIG-SEARCH, --READ-MAPPING and --ORF-PRED options. You can stop and restart the pipeline at any of them.
-  + References of the pipileine: 
-    + [Zakrzewski et al. 2018](https://www.nature.com/articles/s41598-018-22945-y)
-    + [Belda et al. 2019](https://www.ncbi.nlm.nih.gov/pubmed/31429704)
++ The pipeline provide some checkpoints by turn on/off the --FILTERING, --ASSEMBLING, --VIRAL-CONTIG-SEARCH, --READ-MAPPING and --ORF-PRED options. You can stop and restart the pipeline at any of them.
++ References of the pipileine: 
+  + [Zakrzewski et al. 2018](https://www.nature.com/articles/s41598-018-22945-y)
+  + [Belda et al. 2019](https://www.ncbi.nlm.nih.gov/pubmed/31429704)
 
 ## Procedures
 ### Screening RNAseq reads
