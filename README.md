@@ -107,10 +107,12 @@ The job batch file require the below options;
 gs2 input -e 100 -l > output
 ```  
 
+### Genome completion
++ 
+
 ### Genome comparison 
 + Viral sequence found in the pipeline can be compared with its 'neighbors', i.e., some reference sequences of known virus which are annotated to the novel sequence in the Blast analysis or post phylogenetic analysis, or some other novel sequences from other samples having similar taxonomic profiles with the sequence of interest.
 + Sequence comparison based on the sequence similarity of nucleotide or protein level is performed by the pairwise comparison by BlastN or TBlastX visualized using **[Easyfig](https://mjsull.github.io/Easyfig/)** genome comparison tool.  
 An example snapshot;
 ![example snapshot](./image/contig_comp_easyfig.svg)  
 
-### Genome completion
