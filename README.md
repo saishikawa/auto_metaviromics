@@ -5,7 +5,7 @@ Contact: Sohta Ishikawa Ph.D (sota.ishikawa@pasteur.fr)
 
 ***
 ## Flowchart of the pipeline  
-![](./image/auto_metaviromics.png)  
+![](./image/auto_metaviromics.svg)  
 
 ## Usage
 **NOTE:the pipeline assumes that it works a cluster computer managed with Slurm, and dependencies required by pipeline are loaded from the Environment Modules package.  Otherwise you need to install the below dependencies by yourself**
