@@ -1,7 +1,7 @@
 # auto_metaviromics
-An automated pipeline working on metagenomics analyses of mosquito virome
-The current version: 0.2.2
-Contact: Sohta Ishikawa Ph.D (sota.ishikawa@pasteur.fr)
+An automated pipeline working on metagenomics analyses of mosquito virome  
+The current version: 0.2.2  
+Contact: Sohta Ishikawa Ph.D (sota.ishikawa@pasteur.fr)  
 
 ***
 ## Flowchart of the pipeline  
@@ -9,7 +9,7 @@ Contact: Sohta Ishikawa Ph.D (sota.ishikawa@pasteur.fr)
 
 ## Usage
 **NOTE:the pipeline assumes that it works on a cluster computer managed with Slurm, and dependencies required by pipeline are loaded from the Environment Modules package.**  
-**Otherwise you need to install the below dependencies by yourself and set them in your PATH   **
+**Otherwise you need to install the below dependencies by yourself and set them in your PATH**  
 + Dependencies
     + [Trimmomatic](https://github.com/timflutre/trimmomatic)
     + [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml)
