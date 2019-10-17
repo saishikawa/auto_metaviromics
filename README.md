@@ -1,11 +1,14 @@
 # auto_metaviromics
 An automated pipeline working on metagenomics analyses of mosquito virome
+The current version: 0.2.2
+Contact: Sohta Ishikawa Ph.D (sota.ishikawa@pasteur.fr)
 
 ***
 ## Flowchart of the pipeline  
-![Flowchart](Pipeline_description.png)  
+![](./image/auto_metaviromics.png)  
 
 ## Usage
+**NOTE:the pipeline assumes that it works a cluster computer managed with Slurm, and dependencies required by pipeline are loaded from the Environment Modules package.  Otherwise you need to install the below dependencies by yourself**
 ```
 cd ./pipeline
 # follow the tutorial in [NCBItax2lin](https://github.com/zyxue/ncbitax2lin) to dump the latest NCBI taxonomy list to 'lineages-XXXX-XX-XX.csv'
