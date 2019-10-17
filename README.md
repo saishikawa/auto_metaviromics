@@ -8,7 +8,19 @@ Contact: Sohta Ishikawa Ph.D (sota.ishikawa@pasteur.fr)
 ![](./image/auto_metaviromics.svg)  
 
 ## Usage
-**NOTE:the pipeline assumes that it works on a cluster computer managed with Slurm, and dependencies required by pipeline are loaded from the Environment Modules package.  Otherwise you need to install the below dependencies by yourself**
+**NOTE:the pipeline assumes that it works on a cluster computer managed with Slurm, and dependencies required by pipeline are loaded from the Environment Modules package.**  
+**Otherwise you need to install the below dependencies by yourself and set them in your PATH   **
++ Dependencies
+    + [Trimmomatic](https://github.com/timflutre/trimmomatic)
+    + [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml)
+    + [samtools](http://www.htslib.org/doc/samtools.html)
+    + [Megahit](https://github.com/voutcn/megahit)
+    + [metaSPAdes](http://cab.spbu.ru/software/spades/)
+    + [R](https://www.r-project.org/)
+    + [VirFinder](https://github.com/jessieren/VirFinder)
+    + [EMBOSS](http://www.bioinformatics.nl/emboss-explorer)
+    + [vcftools](https://vcftools.github.io/index.html)  
+    
 ```
 cd ./pipeline
 # follow the tutorial in [NCBItax2lin](https://github.com/zyxue/ncbitax2lin) to dump the latest NCBI taxonomy list to 'lineages-XXXX-XX-XX.csv'
