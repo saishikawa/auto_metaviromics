@@ -23,28 +23,34 @@ Contact: Sohta Ishikawa Ph.D (sota.ishikawa@pasteur.fr)
     
 ```
 cd ./pipeline
-# follow the tutorial in [NCBItax2lin](https://github.com/zyxue/ncbitax2lin) to dump the latest NCBI taxonomy list to 'lineages-XXXX-XX-XX.csv'
+find ./ -type f -name "*.tar.gz" -exec tar zxf {} \;
+# follow the tutorial in [NCBItax2lin](https://github.com/zyxue/ncbitax2lin) to dump the latest NCBI taxonomy list to 'lineages-YEAR-MM-DD.csv'
 
-# to run the pipeline on TARS cluster
+# to run the pipeline on the Slurm management
 sbatch run_pipeline.sh
 ```  
 The job batch file require the below options;
 + Options: 
-    +	--CPU=(integer)             specify number of CPUs to be used
-    +	--MEM=(integer)             specify total amount of MEMORY to be used (e.g. specify 16 if you want to use 16GB)
-    +	--SINGLE-PAIR=(integer)     specify 0 if your dataset is the single-end reads and 1 for the pair-end reads
-    +	--SAMPLE-NAME=(string)      specify the name of sample to be analyzed
-    +	--FILTERING=(boolean)       specify yes or no if you want/don't want to filter host & rRNA reads from your raw data
-    +	--HOST-DB=(path)            specify path to BOWTIE2 database of the host mosquito reference sequences
-    +	--RNA-DB=(path)             specify path to BOWTIE2 database of the mosquito & Human rRNA reference sequences
-    +	--ASSEMBLING=(boolean)      specify yes or no if you want/don't want to assemble your sample
-    +	--ASSEMBLE-OUTPUT=(path)    specify path to the output directory of previously performed assemble, if you specified --ASSEMBLING=no
-    +	--SUM-DIAMOND=(boolean)     specify yes or no if you want/don't want to run diamond analysis and its summarization on the host-removed reads set
-    +	--DIAMOND-RVDB=(path)       specify path to DIAMOND formatted RVDB protein database which must be assigned with NCBI taxonomy
-    +	--DIAMOND-NR=(path)         specify path to DIAMOND formatted NCBI nr protein database which must be assigned with NCBI taxonomy
-    +	--LINEAGE=(path)            specify path to NCBI taxonomy dump file converted in lineage format
-    +	--MAPPING=(boolean)         specify yes or no if you want/don't want to map reads on your contigs
-    +	--CONTIGS=(path)            specify path to the contigs set to be subjected to the two-steps read mapping if --MAPPING=yes
+  +	--CPU=(integer)                 specify number of CPUs to be used
+  +	--MEM=(integer)                 specify total amount of MEMORY to be used (e.g. specify 16 if you want to use 16GB)
+  +	--READ-TYPE=(integer)           specify 0 if your dataset is the single-end reads and 1 for the pair-end reads
+  +	--SAMPLE-PATH=(path)            specify path to the sample file to be analyzed, e.g. /path/to/sample/XXX if the pair-end read sequence files are named as XXX_R1.fastq.gz (single-end files should be names as XXX.fastq.gz) 
+  +   --MOSQ-NAME=(string)            specify the full name of your mosquito sampled
++   --DATE=(DD-MON-YEAR)            specify the sampling date
++   --LOCATION=(string)             specify the sampling location
++	--FILTERING=(boolean)           specify yes or no if you want/don't want to filter host & rRNA reads from your raw data
++	--HOST-DB=(path)                specify path to BOWTIE2 database of the host mosquito reference sequences
++	--RNA-DB=(path)                 specify path to BOWTIE2 database of the mosquito & Human rRNA reference sequences
++	--ASSEMBLING=(boolean)          specify yes or no if you want/don't want to assemble your sample
++   --ASSEMBLER=(string)            specify name of the assembler to be used, megahit or metaSPAdes
++	--ASSEMBLE-OUTPUT=(path)        specify path to the output directory of previously performed assemble, if you specified --ASSEMBLING=no
++   --VIRAL-CONTIG-SEARCH=(boolen)  specify yes or no if you want/don't want to search possible viral contigs by VirFInder
++   --VIRFINDER-MODEL=(path)        specify path to the user defined VirFinder model, if you specified --VIRAL-CONTIG-SEARCH=yes
++   --VIRAL-CONTIG-LIST=(path)      specify path to the user defined viral contig list if you specified --VIRAL-CONTIG-SEARCH=no and want to subject your list to the read mapping
++	--READ-MAPPING=(boolean)        specify yes or no if you want/don't want to map reads on your contigs
++   --ORF-PRED=(boolen)             specify yes or no if you want/don't want to predict ORFs on your contigs and perform their functional annotation via DIAMOND
++	--DIAMOND-DB=(path)             specify path to DIAMOND formatted database which must be assigned with NCBI taxonomy, if you specified --ORF-PRED=yes
++	--LINEAGE=(path)                specify path to NCBI taxonomy dump file converted in lineage format, if you specified --ORF-PRED=yes
 + The pipeline provide some checkpoints by turn on/off the --FILTERING, --ASSEMBLING, --SUM-DIAMOND, and --MAPPING options. You can stop and restart the pipeline at any points.
 + Reference of Pipileine: 
     + [Zakrzewski et al. 2018](https://www.nature.com/articles/s41598-018-22945-y)
