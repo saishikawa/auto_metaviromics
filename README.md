@@ -91,16 +91,21 @@ The job batch file require the below options;
 + Contigs from the above mapping procedure is then subjected to the gene prediction by [GeneMark.hmm](http://exon.gatech.edu/index.html). 
 + Predicted genes (ORFs) are translated into protein sequences and then subjected to BlastP search on NCBI NR database using **DIAMOND**
 + The result is summarized in a tab-delimited table, **DIAMOND_BlastP_ORFs.SAMPLENAME.tsv**, showing subject protein sequence and its taxonomy information for each hit.
-+ The pipeline output genbank file for each viral contig, which can be directly loaded and visualized by [UGENE](http://ugene.net/)
-
++ The pipeline output genbank file for each viral contig, which can be directly loaded and visualized by [UGENE](http://ugene.net/)  
 
 ***
 ## Post pipeleine analyses  
-### Phylogenetic analysis of marker proteins, RdRp and capsid
-+ Extract translated protein sequences which are annotated with the RNA-dependent RNA polymerase
-+ Align them with RdRp protein sequences of known ssRNA (positive and negative) and dsRNA viruses exhensively collected from the [ViPR](https://www.viprbrc.org/brc/home.spg?decorator=vipr) database
-+ Sequences are aligned automatically using **MAFFT v7.407** and then manually checked to trim ambiguously aligned positions.
-+ Resultant MSAs are subjected to the maximum-likelihood phylogenetic analysis IQ-TREE with the best model selection option (-m TEST).
+### Phylogenetic placement of novel viral sequences based on marker proteins, RdRp and capsid
++ Pick novel viral sequences, which were annotated with the RNA-dependent RNA polymerase (RdRp) and capsid genes in the pipeline (ORf prediction and BlastP DIAMOND run)
++ RdRp and capsid protein sequence sets of RNA virus (Riboviria) were build and embedded in the /sample directory.
+    + CDS sequences of RdRp and capsid were retrieved from all completed genomes of Riboviria available in GENBANK.
+    + Sequences were then clustered by CD-HIT with the threshold of protein sequence identity >95%.
++ The global RNA viral RdRp/capsid sequence datasets, combined novel viral sequences found in the pipeline, are subjected to the phylogenetic analysis using the [Graph-Splitting method](https://github.com/MotomuMatsui/gs).
+    + The method is suggested to be a robust method to reconstruct phylogenetic tree from sequence data set of highly divergent protein family, which is not capable to be aligned in a single MSA.
++ The folowing command output the phylogenetic tree with branch support value estimated by the GS method.
+```
+gs2 input -e 100 -l > output
+```  
 
 ### Genome comparison 
 + Nucleotide sequences of RNA viral contigs found in samples are translated and compared with each other using tblastX approach (Belda et al. 2019)
