@@ -66,19 +66,17 @@ The job batch file require the below options;
     + The reference of 5.8S, 28S, 18S, 16S, 12S rRNA was built by collecting corresponding sequences of mosquito and human from GENBANK in a FASTA format. 
 + Remove host mosquito reads by mapping the low-quality and rRNA filtered reads on the reference
     + The reference was build from NGS scaffolds from the [VectorBase](https://www.vectorbase.org/organisms/aedes-aegypti) in a FASTA format.
-+ Total number of filtered reads can be computed at each step of screening by **[SeqKit](https://github.com/shenwei356/seqkit)**   
++ Total number of filtered reads can be computed at each step of screening by [SeqKit](https://github.com/shenwei356/seqkit)  
 
-### Contig assemble, BlastX search adn taxonomic annotation
-+ Assemble contigs from the non-low quality and non-mosquito reads set using **MEGAHIT v1.1.2**
-+ Subject assembled contigs to the blastX similarity search on [RVDB](https://rvdb-prot.pasteur.fr/) protein database using **DIAMOND v0.9.24**
-+ At present v16.0 of RVDB database assigned with the latest NCBI taxonomy (September 2019) is used.
-+ Based on its blastx information (possiblly includes multple hits to different taxonomy), and using the LCA algorithm, each contig is annotated to a single taxonomic lineage unless it is 'unclassified'.
-
-### Screening contigs
-+ Detect RNA viral contigs from the DIAMOND result
-    + Screen contigs by length > 1,000 bp, read coverage > 10, and blastX e-value > 1e-10.
-    + Among remained contigs, based on their taxonomic annotations, pick possible RNA viral contigs.
-    + Pick some interesting (possiblly viral) contigs to subject them to the 'two-steps read mapping'
+### Assembling contigs and identifying viral contigs
++ Assemble contigs from the non-low quality and non-rRNA, non-mosquito reads set using **Megahit** or **metaSPAdes**
++ Subject assembled contigs to the viral sequence prediction by their k-mer frequency using **VirFinder**
+    + VirFinder uses an user-trained model to score the possibility of each contig as a viral sequence
+    + The pipeline embedded model was trained based on the CDS sequences of global taxonomy of RNA virus
+        + In GENBANK, all available CDS data was retrieved from Riboviria, of which genome was completed.
+        + Then the collected sequences were clustered based on their nucleotide identity (>95%) using CD-HIT
+        + Clustered sequences set was subjected to the model training by VirFinder, following the [instruction](https://github.com/jessieren/VirFinder)
+        + CDS sequences of host mosquito species were also collected and clustered in the same way and used in the model training.  
 
 ### Mapping reads on the selected contigs themselves
 + For each contig selected from BlastX hits
