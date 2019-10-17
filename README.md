@@ -66,7 +66,8 @@ The job batch file require the below options;
     + The reference of 5.8S, 28S, 18S, 16S, 12S rRNA was built by collecting corresponding sequences of mosquito and human from GENBANK in a FASTA format. 
 + Remove host mosquito reads by mapping the low-quality and rRNA filtered reads on the reference
     + The reference was build from NGS scaffolds from the [VectorBase](https://www.vectorbase.org/organisms/aedes-aegypti) in a FASTA format.
-+ Total number of filtered reads can be computed at each step of screening by [SeqKit](https://github.com/shenwei356/seqkit)  
++ Total number of filtered reads can be computed at each step of screening by [SeqKit](https://github.com/shenwei356/seqkit)
++ Read statistics of the sample are summarized in a tab-delimited file, **Read_Stats_Samples.tsv**  
 
 ### Assembling contigs and identifying viral contigs
 + Assemble contigs from the non-low quality and non-rRNA, non-mosquito reads set using **Megahit** or **metaSPAdes**
@@ -79,23 +80,23 @@ The job batch file require the below options;
         + CDS sequences of host mosquito species were also collected and clustered in the same way and used in the model training.
 + Possible viral contigs were screened by their lengths (> 1000bp), coverages in the assemble (> 10), and p-value scores (< 0.01)
 
-### Mapping reads on viral contigs
+### Mapping reads on the possible viral contigs
 + For each contig predicted by VirFinder;
     +  Map non-low quarity and non-mosquito reads to the contig itself using **BOWTIE2** with '--sensitive-local' option
     +  Create a consensus sequence from the mapped reads, which is assumed to be identical with the original contig
-+ Compute the mapped read count, viral abundance as Reads Per Kilobase Million (RPKM), coverage depth (reads per position), and call genomic variants.  
++ Compute the mapped read count, viral abundance as Reads Per Kilobase Million (RPKM), coverage depth (reads per position), and call genomic variants.
++ Read statistics of contigs are summarized in a tab-delimited file, **Statistics.contigs.SAMPLENAME.tsv**
 
 ### ORF prediction and protein gene annotation
 + Contigs from the above mapping procedure is then subjected to the gene prediction by [GeneMark.hmm](http://exon.gatech.edu/index.html). 
 + Predicted genes (ORFs) are translated into protein sequences and then subjected to BlastP search on NCBI NR database using **DIAMOND**
-+ ~~DIAMOND output file (.DAA) is loaded in **MEGAN6** to perform gene ontology annotation via InterPro2GO and visualize functional annotation of the viral contigs in interest~~
-+ BlastP result is also summarized in a tab-delimited table.
-+ Results of ORF prediction and functional annotation on the contigs of interest are summarized and visualized by [UGENE](http://ugene.net/)
++ The result is summarized in a tab-delimited table, **DIAMOND_BlastP_ORFs.SAMPLENAME.tsv**, showing subject protein sequence and its taxonomy information for each hit.
++ The pipeline  [UGENE](http://ugene.net/)
 
 TO DO
 ***
 
-### Phylogenetic analysis of RdRp protein sequences
+### Phylogenetic analysis of marker proteins, RdRp and capsid
 + Extract translated protein sequences which are annotated with the RNA-dependent RNA polymerase
 + Align them with RdRp protein sequences of known ssRNA (positive and negative) and dsRNA viruses exhensively collected from the [ViPR](https://www.viprbrc.org/brc/home.spg?decorator=vipr) database
 + Sequences are aligned automatically using **MAFFT v7.407** and then manually checked to trim ambiguously aligned positions.
@@ -104,6 +105,8 @@ TO DO
 ### Genome comparison 
 + Nucleotide sequences of RNA viral contigs found in samples are translated and compared with each other using tblastX approach (Belda et al. 2019)
 + Comparison of genomic similarity between viral contigs is visualized using **[Easyfig v2.2.2](https://mjsull.github.io/Easyfig/)**
+
+### Genome completion
 
 ## What we obtain from this pipeline?
 + Detection of RNA viral full/partial genomes, with taxonomic annotations, ORF predictions, comparison of gene repertory/order/similarity, and variant callings
