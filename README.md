@@ -11,6 +11,7 @@ Contact: Sohta Ishikawa Ph.D (sota.ishikawa@pasteur.fr)
 **NOTE:the pipeline assumes that it works on a cluster computer managed with Slurm, and dependencies required by pipeline are loaded from the Environment Modules package.**  
 **Otherwise you need to install the below dependencies by yourself and set them in your PATH**  
 + Dependencies
+    + [SeqKit](https://github.com/shenwei356/seqkit)
     + [Trimmomatic](https://github.com/timflutre/trimmomatic)
     + [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml)
     + [samtools](http://www.htslib.org/doc/samtools.html)
@@ -18,6 +19,8 @@ Contact: Sohta Ishikawa Ph.D (sota.ishikawa@pasteur.fr)
     + [metaSPAdes](http://cab.spbu.ru/software/spades/)
     + [R](https://www.r-project.org/)
     + [VirFinder](https://github.com/jessieren/VirFinder)
+    + [GeneMark.hmm with Heuristic models](http://exon.gatech.edu/index.html)
+        + Packaged in MetaGeneMark software
     + [EMBOSS](http://www.bioinformatics.nl/emboss-explorer)
     + [vcftools](https://vcftools.github.io/index.html)  
     
@@ -57,13 +60,12 @@ The job batch file require the below options;
   + [Belda et al. 2019](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6702732)
 
 ## Procedures
-### Screening RNAseq reads
-+ Remove low-quality reads by **Trimmomatic v0.36**
-+ Remove host & human rRNA reads by mapping the low-quality filtered reads on the reference using **BOWTIE2 v2.3.4.3** with '--sensitive-local' option
-    + The reference of 5.8S, 28S, 18S, 16S, 12S rRNA was built by collecting corresponding sequences of mosquito and human in NCBI database. 
-+ Remove host mosquito reads by  by mapping the low-quality and rRNA filtered reads on the reference
-    + The reference was build from NGS scaffold sets from the [VectorBase](https://www.vectorbase.org/organisms/aedes-aegypti)
-    + [Aedes aegypti cell line 2](https://www.vectorbase.org/organisms/aedes-aegypti) and 14 Anopheles species NGS scaffolds were used to screen the host-derived reads.
+### Screening low-quality, rRNA- and host-derived reads
++ Remove low-quality reads by **Trimmomatic**
++ Remove host & human rRNA reads by mapping the low-quality filtered reads on the reference using **BOWTIE2** with '--sensitive-local' option
+    + The reference of 5.8S, 28S, 18S, 16S, 12S rRNA was built by collecting corresponding sequences of mosquito and human from GENBANK in a FASTA format. 
++ Remove host mosquito reads by mapping the low-quality and rRNA filtered reads on the reference
+    + The reference was build from NGS scaffolds from the [VectorBase](https://www.vectorbase.org/organisms/aedes-aegypti) in a FASTA format.
 + Total number of filtered reads can be computed at each step of screening by **[SeqKit](https://github.com/shenwei356/seqkit)**   
 
 ### Contig assemble, BlastX search adn taxonomic annotation
