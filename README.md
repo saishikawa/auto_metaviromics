@@ -101,16 +101,16 @@ The job batch file require the below options;
 + RdRp and capsid protein sequence sets of RNA virus (Riboviria) were build and embedded in the /sample directory.
     + CDS sequences of RdRp and capsid were retrieved from all completed genomes of Riboviria available in GENBANK.
     + Sequences were then clustered by CD-HIT with the threshold of protein sequence identity >95%.
-+ The global RNA viral RdRp/capsid sequence datasets, combined novel viral sequences found in the pipeline, are subjected to the phylogenetic analysis using the [Graph-Splitting method](https://github.com/MotomuMatsui/gs).
-    + The method is suggested to be a robust method to reconstruct phylogenetic tree from sequence data set of highly divergent protein family, which is not capable to be aligned in a single MSA.
++ The global RNA viral RdRp/capsid sequence datasets, combined with novel viral sequences found in the pipeline, are subjected to the phylogenetic analysis using the [Graph-Splitting method](https://github.com/MotomuMatsui/gs).
+    + The method is suggested to be a robust method to reconstruct phylogenetic tree from sequence data set of highly divergent protein family, which is not capable to the ML and Bayesian phylogenetic methods based the multiple sequence alignment.
 + The folowing command output the phylogenetic tree with branch support value estimated by the GS method.
 ```
 gs2 input -e 100 -l > output
 ```  
 
 ### Genome comparison 
-+ Viral sequence found in the pipeline can be compared with its 'neighbors', i.e., reference full genome sequence of a known virus if it is estimated to be closely related to the sequence of interest in Blast or post phylogenetic analysis, or we can directly compare viral seqeuneces found in several samples if they show similar taxonomy profile as they are of same (or very similar) virus species.
-+ Sequence comparison based on the similarity of nucleotide or protein level can be performed by the pairwise comparison by BlastN or TBlastX, and visualized using **[Easyfig](https://mjsull.github.io/Easyfig/)** genome comparison tool.  
++ Viral sequence found in the pipeline can be compared with its 'neighbors', i.e., reference full genome sequence of a known virus if it is estimated to be closely related to the target viral sequence in Blast or post phylogenetic analysis, or we can directly compare viral seqeuneces found in several samples if they show similar taxonomy profile as they are of same (or very similar) virus species.
++ Pairwise comparison based on the similarity of nucleotide or protein level can be performed by BlastN or TBlastX, and visualized using **[Easyfig](https://mjsull.github.io/Easyfig/)** genome comparison tool.  
 An example snapshot;
 ![example snapshot](./image/contig_comp_easyfig.svg)  
 
