@@ -109,8 +109,8 @@ gs2 input -e 100 -l > output
 ```  
 
 ### Genome comparison 
-+ Viral sequence found in the pipeline can be compared with its 'neighbors', i.e., some reference sequences of known virus which are annotated to the novel sequence in the Blast analysis or post phylogenetic analysis, or some other novel sequences from other samples having similar taxonomic profiles with the sequence of interest.
-+ Sequence comparison based on the sequence similarity of nucleotide or protein level is performed by the pairwise comparison by BlastN or TBlastX visualized using **[Easyfig](https://mjsull.github.io/Easyfig/)** genome comparison tool.  
++ Viral sequence found in the pipeline can be compared with its 'neighbors', i.e., reference full genome sequence of a known virus if it is estimated to be closely related to the sequence of interest in Blast or post phylogenetic analysis, or we can directly compare viral seqeuneces found in several samples if they show similar taxonomy profile as they are of same (or very similar) virus species.
++ Sequence comparison based on the similarity of nucleotide or protein level can be performed by the pairwise comparison by BlastN or TBlastX, and visualized using **[Easyfig](https://mjsull.github.io/Easyfig/)** genome comparison tool.  
 An example snapshot;
 ![example snapshot](./image/contig_comp_easyfig.svg)  
 
