@@ -86,6 +86,7 @@ The job batch file require the below options;
     +  Create a consensus sequence from the mapped reads, which is assumed to be identical with the original contig
 + Compute the mapped read count, viral abundance as Reads Per Kilobase Million (RPKM), coverage depth (reads per position), and call genomic variants.
 + Read statistics of contigs are summarized in a tab-delimited file, **Statistics.contigs.SAMPLENAME.tsv**
++ Coverage depths and called variants are summarized and visualized for each contig using **iGV**.  
 
 ### ORF prediction and protein gene annotation
 + Contigs from the above mapping procedure is then subjected to the gene prediction by [GeneMark.hmm](http://exon.gatech.edu/index.html). 
@@ -106,9 +107,6 @@ The job batch file require the below options;
 ```
 gs2 input -e 100 -l > output
 ```  
-
-### Genome completion
-+ 
 
 ### Genome comparison 
 + Viral sequence found in the pipeline can be compared with its 'neighbors', i.e., some reference sequences of known virus which are annotated to the novel sequence in the Blast analysis or post phylogenetic analysis, or some other novel sequences from other samples having similar taxonomic profiles with the sequence of interest.
