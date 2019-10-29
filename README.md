@@ -1,6 +1,6 @@
 # auto_metaviromics
 An automated pipeline working on metagenomics analyses of mosquito virome  
-The current version: 0.2.2  
+The current version: 0.2.3  
 Contact: Sohta Ishikawa Ph.D (sota.ishikawa@pasteur.fr)  
 
 ***
@@ -22,7 +22,8 @@ Contact: Sohta Ishikawa Ph.D (sota.ishikawa@pasteur.fr)
     + [GeneMark.hmm with Heuristic models](http://exon.gatech.edu/index.html)
         + Packaged in MetaGeneMark software
     + [EMBOSS](http://www.bioinformatics.nl/emboss-explorer)
-    + [vcftools](https://vcftools.github.io/index.html)  
+    + [vcftools](https://vcftools.github.io/index.html)
+    + [HMMER3](http://hmmer.org/)  
     
 ```
 cd ./pipeline
@@ -85,18 +86,19 @@ The job batch file require the below options;
     +  Map non-low quarity and non-mosquito reads to the contig itself using **BOWTIE2** with '--sensitive-local' option
     +  Create a consensus sequence from the mapped reads, which is assumed to be identical with the original contig
 + Compute the mapped read count, viral abundance as Reads Per Kilobase Million (RPKM), coverage depth (reads per position), and call genomic variants.
-+ Read statistics of contigs are summarized in a tab-delimited file, **Statistics.contigs.SAMPLENAME.tsv**
-+ Coverage depths and called variants are summarized and visualized for each contig using **iGV**.  
++ Statistics of contigs are summarized in a tab-delimited file, **Statistics.contigs.SAMPLENAME.tsv**
++ Coverage depths and called variants are summarized and visualized for each contig, with sufficiently high coverage, using **iGV**.  
 
 ### ORF prediction and protein gene annotation
 + Contigs from the above mapping procedure is then subjected to the gene prediction by [GeneMark.hmm](http://exon.gatech.edu/index.html). 
-+ Predicted genes (ORFs) are translated into protein sequences and then subjected to BlastP search on NCBI NR database using **DIAMOND**
++ Predicted genes (ORFs) are translated into protein sequences and then subjected to the search of its homologs in the [RVDB-prot](https://rvdb-prot.pasteur.fr/) database using the profile HMMs with **HMMER3**
++ The **jackhmmer** program was used for the homolog searching, with five iterations and output e-value threshold <1.0e-10 
 + The result is summarized in a tab-delimited table, **DIAMOND_BlastP_ORFs.SAMPLENAME.tsv**, showing subject protein sequence and its taxonomy information for each hit.
-+ The pipeline output genbank file for each viral contig, which can be directly loaded and visualized by [UGENE](http://ugene.net/)  
++ The pipeline output genbank file for each viral contig with predicted ORFs, which can be directly loaded and visualized by [UGENE](http://ugene.net/)  
 
 ***
 ## Post pipeleine analyses  
-### Phylogenetic placement of novel viral sequences based on marker proteins, RdRp and capsid
+### Phylogenetic placement of novel viral sequences based on marker proteins, e.g. RdRp and capsid
 + Pick novel viral sequences, which were annotated with the RNA-dependent RNA polymerase (RdRp) and capsid genes in the pipeline (ORf prediction and BlastP DIAMOND run)
 + RdRp and capsid protein sequence sets of RNA virus (Riboviria) were build and embedded in the /sample directory.
     + CDS sequences of RdRp and capsid were retrieved from all completed genomes of Riboviria available in GENBANK.
