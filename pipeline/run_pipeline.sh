@@ -12,7 +12,7 @@ source /pasteur/homes/sishikaw/.bashrc
 
 source /local/gensoft2/adm/etc/profile.d/modules.sh
 module load Trimmomatic bowtie2/2.3.4.3 samtools/1.9 diamond/0.9.24 Python/3.7.2 htslib/1.9 tabix/0.2.6 primer3/1.1.4 ClustalW golden
-module load megahit/1.1.2 EMBOSS R/3.6.0 vcftools/0.1.13 SPAdes/3.12.0
+module load megahit/1.1.2 EMBOSS R/3.6.0 vcftools/0.1.13 SPAdes/3.12.0 hmmer/3.2.1
 
 srun perl metagenomics_pipeline_v0.2.2.pl \
 --CPU=4 \
@@ -33,7 +33,7 @@ srun perl metagenomics_pipeline_v0.2.2.pl \
 --VIRAL-CONTIG-LIST=/path/to/viral/contig/list \
 --READ-MAPPING=yes \
 --ORF-PRED=yes \
---DIAMOND-DB=/path/to/DIAMOND/DB/file \
+--HMMER-DB=/path/to/HMMER/sequence/database \
 --LINEAGE=/path/to/taxonomy/dump/file 
 
 # Options: 
