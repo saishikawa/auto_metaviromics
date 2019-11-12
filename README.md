@@ -59,6 +59,7 @@ The job batch file require the below options;
 + References of the pipileine: 
   + [Zakrzewski et al. 2018](https://www.nature.com/articles/s41598-018-22945-y)
   + [Belda et al. 2019](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6702732)
+  + [Langille Lab - Viromics Pipeline](https://github.com/LangilleLab/microbiome_helper/wiki/Viromics-Pipeline)
 
 ## Procedures
 ### Screening low-quality, rRNA- and host-derived reads
