@@ -76,7 +76,8 @@ You can stop/restart the pipeline at any of them.
 + Read statistics of the sample are summarized in a tab-delimited format in **Read_Stats_Samples.tsv**  
 
 ### Assembling and identifying viral contigs
-+ Assemble contigs from the non-low quality, non-rRNA and non-host reads using **Megahit** or **metaSPAdes**
++ Assemble contigs from the non-low quality, non-rRNA and non-host reads using **Megahit** or **metaSPAdes**  
+
 **Procedure1 (our own)**  
 + Subject assembled contigs to the viral sequence prediction by **VirFinder**
     + VirFinder uses an user-trained model (/pipeline/*.rda) to score the possibility of each contig as a viral sequence
