@@ -68,7 +68,7 @@ You can stop/restart the pipeline at any of them.
 ## Pipeline description
 ### Screening low-quality, rRNA- and host-derived reads
 + Remove low-quality reads by **Trimmomatic**
-+ Remove host & human rRNA reads by mapping the reads (low-quality filtered) on the reference genomic sequences using **BOWTIE2**
++ Remove host & human rRNA reads by mapping the reads (low-quality filtered) on the reference genomic sequences using **BOWTIE2** with '--sensitive-local' option
     + The references of 5.8S, 28S, 18S, 16S, 12S rRNA sequences were built from the collection derived from GENBANK database 
 + Remove host mosquito reads by mapping the reads (low-quality and rRNA filtered) on the reference genomic sequences  
     + The reference was build from NGS scaffolds from [VectorBase](https://www.vectorbase.org/organisms/aedes-aegypti)
@@ -97,7 +97,7 @@ You can stop/restart the pipeline at any of them.
 
 ### Mapping reads on viral contigs
 + For each contig predicted by **VirFinder** or **DIAMOND**;
-    +  Map reads to the contig itself using **BOWTIE2** with '--sensitive-local' option
+    +  Map reads to the contig itself using **BOWTIE2** with '--very-sensitive-local' option
     +  Create a consensus sequence from the mapped reads, which is assumed to be identical with the original contig (but will have some extension)  
 + Compute the mapped read count, Reads Per Kilobase Million (RPKM), coverage depth (reads per position), and call genomic variants.
 + Statistics of contigs are summarized in a tab-delimited file, **Statistics.contigs.SAMPLENAME.tsv**
